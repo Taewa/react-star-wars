@@ -1,0 +1,62 @@
+@import "../../theme/var";
+
+.list-item-area {
+    border-radius: 6px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    color: $mainThemeColor;
+    overflow: hidden;
+    transition: 0.3s ease;
+    animation: 0.4s zoomIn;
+
+    &:hover {
+        transform: scale(1.03);
+
+        .title {
+            animation: 0.3s pulse;
+        }
+    }
+
+    .inner {
+        text-align: center;
+        padding: 14px 0;
+        background: #000;
+
+        .episode {
+            font-size: 11px;
+            color: #999;
+            font-family: sans-serif;
+        }
+
+
+        .title {
+            font-family: Starjhol;
+            font-size: 22px;
+            font-weight: normal;
+            letter-spacing: -1px;
+            margin-top: 0;
+            margin-bottom: 2px;
+            transition: 0.3s ease;
+        }
+
+        .date {
+            display: inline-block;
+            text-align: center;
+            font-size: 10px;
+            padding: 2px 8px;
+            background: #000;
+            color: #bbb;
+            border-radius: 10px;
+            font-family: sans-serif;
+        }
+
+        .director{
+            color: #eee;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+    }
+    
+
+
+
+}

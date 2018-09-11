@@ -1,0 +1,41 @@
+@import "./theme/var";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Starjedi;
+  background: #000;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+p {
+    margin: 0;
+}
+
+.wrapper {
+    padding: 40px 20px;
+}
+
+.app-title {
+    font-size: 54px;
+    margin: 0 0 20px 0;
+    text-align: center;
+    color: $mainThemeColor;
+    font-family: Starjhol;
+    animation: fadeIn 1.5s;
+    transition: 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}

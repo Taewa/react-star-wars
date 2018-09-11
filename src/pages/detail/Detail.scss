@@ -1,0 +1,56 @@
+@import "../../theme/var";
+
+.detail-area {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+
+    @include  pageLayout;
+
+    .title {
+        padding-bottom: 8px;
+        border-bottom: 1px solid #000;
+    }
+
+    .info-area {
+        padding-bottom: 20px;
+    }
+
+
+    
+    .badge {
+        padding: 5px;
+        background: #000;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 12px;
+        margin: 0 2px;
+        font-family: sans-serif;
+
+        &.char {
+            color: $mainThemeColor;
+        }
+    }
+
+
+
+    .chart-gender {
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding-bottom: 20px;
+    }
+
+    .chart-star-ship {
+        .chart-title{
+            margin-bottom: 0;
+        }
+
+        .explain{
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+    }
+    
+    
+}
