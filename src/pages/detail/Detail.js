@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Api from '../../services/Api/Api';
 import axios from 'axios'
 import './Detail.scss';
+import Loading from '../../components/loading/Loading';
 import {Scatter, Doughnut} from 'react-chartjs-2';
 
 
@@ -17,7 +18,8 @@ class DetailPage extends Component {
             genders: [],
             ships: [],
             // From Google color palette
-            colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#994499', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#329262', '#5574A6', '#3B3EAC']
+            colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#994499', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#329262', '#5574A6', '#3B3EAC'],
+            loadingCharacter: true
         };
     }
 
@@ -40,6 +42,7 @@ class DetailPage extends Component {
 
     loadCharacter() {
         let charArr = [];
+
         this.state.pageData.characters.forEach((char) => {
             charArr.push(
                 Api.get(char)
@@ -49,6 +52,7 @@ class DetailPage extends Component {
         axios.all(charArr).then((chars) => {
             this.setState({chars});
             this.setGenders();
+            this.setState({loadingCharacter : false});
         });
     }
 
@@ -99,15 +103,16 @@ class DetailPage extends Component {
 
 
     render() {
-        const data = this.state.pageData;
+        const {pageData, colors, genders, loadingCharacter} = this.state;
+        const data = pageData;
         const genderData = {
-            labels: Object.keys(this.state.genders),
+            labels: Object.keys(genders),
             datasets: [
                 {
                     label: "Genders",
-                    backgroundColor: this.state.colors,
+                    backgroundColor: colors,
                     borderColor: '#000',
-                    data: Object.values(this.state.genders),
+                    data: Object.values(genders),
                 }
             ]
         };
@@ -121,8 +126,8 @@ class DetailPage extends Component {
                     label: [ship.data.name],
                         fill: false,
                     showLine: true,
-                    backgroundColor: this.state.colors[idx],
-                    pointBorderColor: this.state.colors[idx],
+                    backgroundColor: colors[idx],
+                    pointBorderColor: colors[idx],
                     borderColor: '#000',
                     pointBorderWidth: 3,
                     pointHoverRadius: 5,
@@ -176,13 +181,15 @@ class DetailPage extends Component {
                 </div>
 
                 <div className="chart-area">
-
-                    <div className="chart-gender">
+                    <div className="chart chart-gender">
                         <h2 className="chart-title">Character gender repartition</h2>
-                        <Doughnut data={genderData}/>
+                    {
+                        loadingCharacter? <Loading /> : <Doughnut data={genderData}/>
+                    }
                     </div>
 
-                    <div className="chart-star-ship">
+
+                    <div className="chart chart-star-ship">
                         <h2 className="chart-title">Starship cost and speed comparison</h2>
                         <p className="explain">(x : cost, y : speed)</p>
                         <Scatter data={starShipData} options={scatterOpt} />
